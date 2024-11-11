@@ -9,6 +9,7 @@ import MyProfile from './pages/MyProfile'; // Ensure this component exists
 import MyAppointments from './pages/MyAppointments'; // Ensure this component exists
 import Appointments from './pages/Appointments'; // Ensure this component exists
 import Navbar from './components/Navbar';
+import Footer from './components/footer';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -28,6 +29,7 @@ function App() {
           <Route path='/my-appointments' element={<MyAppointments />} />
           <Route path='/appointments/:docId' element={<Appointments />} />
         </Routes>
+        <Footer/>
       </div>
     </>
   );
