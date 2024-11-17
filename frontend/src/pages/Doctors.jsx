@@ -111,27 +111,23 @@ const Doctors = () => {
         </div>
 
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
-          {
-            filterDoc.map((item, index) => (
-              <div
-                key={index}
-                onClick={() => navigate(`../appointments/${item._id}`)}
-                className="border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:-translate-y-2 transition-all duration-500"
-              >
-                <img className="bg-blue-50" src={item.image} alt="" />
-                <div className="p-4">
-                  <div className="flex items-center gap-2 text-sm text-green-500">
-                    <p className="w-2 h-2 bg-green-500 rounded-full"></p>
-                    <p>Available</p>
-                  </div>
-                  <p className="text-gray-900 text-lg font-medium">
-                    {item.name}
-                  </p>
-                  <p className="text-gray-600">{item.speciality}</p>
+          {filterDoc.map((item, index) => (
+            <div
+              key={index}
+              onClick={() => navigate(`../appointments/${item._id}`)}
+              className="border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:-translate-y-2 transition-all duration-500"
+            >
+              <img className="bg-blue-50" src={item.image} alt="" />
+              <div className="p-4">
+                <div className="flex items-center gap-2 text-sm text-green-500">
+                  <p className="w-2 h-2 bg-green-500 rounded-full"></p>
+                  <p>Available</p>
                 </div>
+                <p className="text-gray-900 text-lg font-medium">{item.name}</p>
+                <p className="text-gray-600">{item.speciality}</p>
               </div>
-            ))
-          }
+            </div>
+          ))}
         </div>
       </div>
     </div>
