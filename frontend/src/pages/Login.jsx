@@ -21,7 +21,7 @@ const Login = () => {
           appointment
         </p>
 
-        <div className={`w-full ${state === "Sign-Up"?"":"hidden"}`}>
+        <div className={`w-full ${state === "Sign-Up" ? "" : "hidden"}`}>
           <p>Name</p>
           <input
             className="border border-gray-600 rounded w-full p-2 mt-1"
@@ -57,11 +57,27 @@ const Login = () => {
           {state === "Sign-Up" ? "Create Account" : "Login"}
         </button>
 
-        {
-          state === "Sign-Up"
-          ?<p>Already have an account? <span onClick={()=>setState("login")} className="text-primary underline cursor-pointer">Login Here</span></p>
-          :<p>Create a new Account <span onClick={()=>setState("Sign-Up")} className="text-primary underline cursor-pointer">Click Here</span> </p>
-        }
+        {state === "Sign-Up" ? (
+          <p>
+            Already have an account?{" "}
+            <span
+              onClick={() => setState("login")}
+              className="text-primary underline cursor-pointer"
+            >
+              Login Here
+            </span>
+          </p>
+        ) : (
+          <p>
+            Create a new Account{" "}
+            <span
+              onClick={() => setState("Sign-Up")}
+              className="text-primary underline cursor-pointer"
+            >
+              Click Here
+            </span>{" "}
+          </p>
+        )}
       </div>
     </form>
   );
