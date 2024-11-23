@@ -2,8 +2,6 @@ import React, { useState } from "react"; // Fixed: useState from 'react'
 
 import { assets } from "../assets/assets";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import About from "./../pages/About";
-import Appointments from "./../pages/Appointments";
 const Navbar = () => {
   const navigate = useNavigate();
 
@@ -68,6 +66,28 @@ const Navbar = () => {
             Create Account
           </button>
         )}
+      </div>
+      <img
+        onClick={() => setShowMenu(true)}
+        className="w-6 md:hidden"
+        src={assets.menu_icon}
+        alt=""
+      />
+      <div className={`md:hidden right-0 top-0 bottom-0 z-20 overflow-hidden bg-white transition-all `}>
+        <div>
+          <img src={assets.logo} alt="" />
+          <img
+            onClick={() => setShowMenu(false)}
+            src={assets.cross_icon}
+            alt=""
+          />
+        </div>
+        <ul>
+          <NavLink>Home</NavLink>
+          <NavLink>All Docs</NavLink>
+          <NavLink>About</NavLink>
+          <NavLink>Contact</NavLink>
+        </ul>
       </div>
     </div>
   );
