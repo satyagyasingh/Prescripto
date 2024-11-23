@@ -9,7 +9,7 @@ import MyProfile from './pages/MyProfile'; // Ensure this component exists
 import MyAppointments from './pages/MyAppointments'; // Ensure this component exists
 import Appointments from './pages/Appointments'; // Ensure this component exists
 import Navbar from './components/Navbar';
-import Footer from './components/footer';
+import Footer from "./components/Footer";
 
 function App() {
   const [count, setCount] = useState(0);
