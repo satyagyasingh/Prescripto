@@ -21,7 +21,7 @@ const Contact = () => {
           </div>
           <div className="flex flex-col items-start text-gray-500">
             <span>Tel: (000) 000-0000</span>
-            <span>Email: satyagyasingh@gmail.com</span>
+            {/* <span>Email: satyagyasingh@gmail.com</span> */}
           </div>
           <p className="font-semibold text-lg text-gray-600">
             CAREERS AT PRESCRIPTO
