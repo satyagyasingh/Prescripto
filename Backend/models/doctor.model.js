@@ -10,6 +10,8 @@ const doctorSchema = new mongoose.Schema({
     about: { type: String, required: true },
     available: { type: Boolean, required: true },
     fee: { type: Number, required: true },
+    address : {type : Object, require : true},
+    date : {type : Number , required : true},
     slots_booked : {type : Object, default : {}}
 },{minimize : false}); // lets empty feilds not being deleted
 
