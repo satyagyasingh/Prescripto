@@ -73,7 +73,7 @@ const Navbar = () => {
         src={assets.menu_icon}
         alt=""
       />
-      <div className={`md:hidden right-0 top-0 bottom-0 z-20 overflow-hidden bg-white transition-all `}>
+      {/* <div className={`md:hidden right-0 top-0 bottom-0 z-20 overflow-hidden bg-white transition-all `}>
         <div>
           <img src={assets.logo} alt="" />
           <img
@@ -88,7 +88,7 @@ const Navbar = () => {
           <NavLink>About</NavLink>
           <NavLink>Contact</NavLink>
         </ul>
-      </div>
+      </div> */}
     </div>
   );
 };
