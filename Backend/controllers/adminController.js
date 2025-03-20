@@ -77,7 +77,7 @@ const addDoctor = async (req, res) => {
     }
 
     const doctor = new doctorModel(doctorData);
-    console.log("doctor to be created");
+    // console.log("doctor to be created");
 
     // Save doctor to the database
     await doctor.save();
