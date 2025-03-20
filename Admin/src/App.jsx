@@ -1,14 +1,29 @@
-import { useState } from 'react'
+import { useContext, useState } from "react";
+import Login from "./pages/login.jsx";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { AdminContext } from "./context/AdminContext.jsx";
+import Navbar from './components/Navbar.jsx';
+import SideBar from "./components/SideBar.jsx";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { aToken } = useContext(AdminContext);
 
-  return (
-    <>
-      
-      <div className='border-y-black border-x-purple-600 border-8 max-w-full '>Welcome</div>
-    </>
-  )
+  return aToken ? (
+    <div>
+      <ToastContainer />
+      <Navbar/>
+      <div className="flex items-start">
+        <SideBar/>
+      </div>
+    </div>
+  ) : (
+    <div>
+      <Login />
+      <ToastContainer />
+    </div>
+
+  );
 }
 
-export default App
+export default App;

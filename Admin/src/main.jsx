@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom';
-import { DoctorContextProvider } from './context/DoctorContext';
+import  DoctorContextProvider  from './context/DoctorContext';
 import AppContextProvider from './context/AppContext.jsx';
 import AdminContextProvider from './context/AdminContext.jsx';
 
@@ -15,8 +15,10 @@ createRoot(document.getElementById('root')).render(
 
           <App />
         
-          </AppContextProvider>
+        </AppContextProvider>
       </DoctorContextProvider>
     </AdminContextProvider>
   </BrowserRouter>,
 )
+
+
