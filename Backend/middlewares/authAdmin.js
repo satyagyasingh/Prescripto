@@ -5,17 +5,27 @@ import jwt from 'jsonwebtoken';
 const authAdmin = async (req,res,next) => {
 
     try{
-        const {atoken} = req.headers;
+        const { aToken } = req.headers;
 
-        if(!atoken){
-            return res.json({success :false, message :'Not authorized login to add the doctor'})
+        if (!aToken) {
+          return res.json({
+            success: false,
+            message: `Not authorized login to add the doctor, AToken not found ${aToken}`,
+          });
         }
 
-        const decodedToken = jwt.verify(atoken, process.env.JWT_SECRET)
+        const decodedToken = jwt.verify(aToken, process.env.JWT_SECRET);
 
-        console.log("decoded token : "+ decodedToken.email)
-        if(decodedToken.email != process.env.ADMIN_EMAIL ||decodedToken.password !=  process.env.ADMIN_PASSWORD){
-            return res.json({success :false, message :'Not authorized login to add the doctor'})
+        console.log("decoded token : " + decodedToken.email);
+        if (
+          decodedToken.email != process.env.ADMIN_EMAIL ||
+          decodedToken.password != process.env.ADMIN_PASSWORD
+        ) {
+          return res.json({
+            success: false,
+            message:
+              "Not authorized login to add the doctor, AToken did not match",
+          });
         }
         next()
     }catch (error){
