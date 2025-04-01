@@ -5,12 +5,13 @@ import jwt from 'jsonwebtoken';
 const authAdmin = async (req,res,next) => {
 
     try{
-        const { aToken } = req.headers;
+        const aToken = req.headers.atoken;
 
         if (!aToken) {
           return res.json({
             success: false,
             message: `Not authorized login to add the doctor, AToken not found ${aToken}`,
+            system: req.headers,
           });
         }
 

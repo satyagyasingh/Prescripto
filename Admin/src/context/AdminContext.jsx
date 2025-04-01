@@ -17,7 +17,13 @@ const AdminContextProvider = (props) => {
             }else{
                 console.log("we are sending a token" + aToken)
             }
-            const { data } = await axios.post(backendUrl + '/api/admin/all-doctors', { headers: { aToken } })
+            //this did not work
+            // const { data } = await axios.post(backendUrl + '/api/admin/all-doctors', { headers: { aToken } })
+            const { data } = await axios.get(
+                `${backendUrl}/api/admin/all-doctors`,
+                { headers: { aToken: aToken } } // Explicitly set header key
+            );
+
             if (data.success) {
                 setDoctors(data.doctors)
                 console.log(data.doctors)

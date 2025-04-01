@@ -6,7 +6,7 @@ import { AdminContext } from "./context/AdminContext.jsx";
 import Navbar from './components/Navbar.jsx';
 import SideBar from "./components/SideBar.jsx";
 import { Route, Routes } from "react-router-dom";
-import Dashboard from "./pages/Admin/DashBoard.jsx";
+import Dashboard from "./pages/Admin/Dashboard.jsx";
 import AllAppointments from './pages/Admin/AllAppointments';
 import AddDoctor from './pages/Admin/AddDoctor';
 import DoctorsList from "./pages/Admin/DoctorsList.jsx";
