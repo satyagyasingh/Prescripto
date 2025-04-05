@@ -1,0 +1,7 @@
+node_modules
+dist
+.env
+Backend/public/temp/*
+!Backend/public/temp/.gitkeep
+.cph
+*.cpp
