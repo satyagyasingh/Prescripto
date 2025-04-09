@@ -10,12 +10,12 @@ const doctorSchema = new mongoose.Schema({
     about: { type: String, required: true },
     available: { type: Boolean, default: true },
     fee: { type: Number, required: true },
-    address : {type : Object, require : true},
+    address : {type : Object, required : true},
     date : {type : Number , required : true},
     slots_booked : {type : Object, default : {}}
 },{minimize : false}); // lets empty feilds not being deleted
 
 
-const doctorModel = mongoose.model.doctor || mongoose.model('doctor',doctorSchema)
+const doctorModel = mongoose.models.doctor || mongoose.model('doctor',doctorSchema)
 
 export {doctorModel}
