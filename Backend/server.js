@@ -5,6 +5,7 @@ import { connectDB } from './config/mongodb.js'
 import { connectCloudinary } from './config/cloudinary.js'
 import { adminRouter } from './routes/admin.route.js'
 import doctorRouter from './routes/doctor.route.js'
+import userRouter from './routes/user.route.js'
 
 
 const app = express()
@@ -20,6 +21,7 @@ app.use(cors())
 //api endpoints
 app.use('/api/admin', adminRouter)
 app.use('/api/doctor', doctorRouter)
+app.use('/api/user', userRouter)
 //localhost/4000/api/admin
 
 app.get('/',(req, res)=>{
