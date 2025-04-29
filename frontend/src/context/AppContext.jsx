@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from "react";
-// import { doctors } from "../assets/assets";
 import { toast } from "react-toastify";
 import axios from 'axios'
 
@@ -19,7 +18,6 @@ const AppContextProvider = (props) => {
     try {
 
         const { data } = await axios.get(backendUrl + '/api/doctor/list')
-        console.log("Data that we got : " + data);
         if (data.success) {
             setDoctors(data.doctors)
         } else {
@@ -30,15 +28,52 @@ const AppContextProvider = (props) => {
         console.log(error)
         toast.error(error.message)
     }
-}
-useEffect(() => {
-  getDoctosData();
-}, []);
+  }
+
+  const loadUserProfileData = async () => {
+
+    try {
+
+        const { data } = await axios.get(backendUrl + '/api/user/get-profile', { headers: { token } })
+        if (data.success) {
+            setUserData(data.userData)
+        } else {
+            toast.error(data.message)
+        }
+
+    } catch (error) {
+        console.log(error)
+        toast.error(error.message)
+    }
+  }
+
+  const logout = () => {
+    setToken('')
+    setUserData(false)
+    localStorage.removeItem('token')
+  }
+
+  useEffect(() => {
+    getDoctosData();
+  }, []);
+
+  useEffect(() => {
+    if (token) {
+      loadUserProfileData()
+    } else {
+      setUserData(false)
+    }
+  }, [token]);
 
   const value = {
     doctors,
     currencySymbol,
-    getDoctosData
+    getDoctosData,
+    backendUrl,
+    token, setToken,
+    userData, setUserData,
+    loadUserProfileData,
+    logout
   };
 
   return (

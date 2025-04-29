@@ -1,4 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { AppContext } from "../context/AppContext";
 
 const Login = () => {
   const [state, setState] = useState("Sign-Up");
@@ -6,12 +10,38 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
 
+  const { backendUrl, token, setToken } = useContext(AppContext);
+  const navigate = useNavigate();
+
   const onSubmitHandler = async (event) => {
     event.preventDefault();
+
+    try {
+      const endpoint = state === "Sign-Up" ? "/api/user/register" : "/api/user/login";
+      const payload = state === "Sign-Up" ? { name, email, password } : { email, password };
+
+      const { data } = await axios.post(backendUrl + endpoint, payload);
+
+      if (data.success) {
+        localStorage.setItem("token", data.token);
+        setToken(data.token);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
   };
 
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, [token]);
+
   return (
-    <form>
+    <form onSubmit={onSubmitHandler}>
       <div className="mt-20 flex flex-col gap-3 m-auto items-start text-gray-600 p-8 w-max min-w-[340px] sm:min-w-96 border rounded-xl text-zink-600 text-sm shadow-lg">
         <p className="text-2xl font-semibold">
           {state === "Sign-Up" ? "Create Account" : "Login"}
@@ -28,7 +58,7 @@ const Login = () => {
             type="text"
             onChange={(e) => setName(e.target.value)}
             value={name}
-            required
+            required={state === "Sign-Up"}
           />
         </div>
         <div className="w-full ">
@@ -53,7 +83,7 @@ const Login = () => {
           />
         </div>
 
-        <button className="bg-primary text-white w-full py-2 mt-4 rounded-md text-base">
+        <button type="submit" className="bg-primary text-white w-full py-2 mt-4 rounded-md text-base">
           {state === "Sign-Up" ? "Create Account" : "Login"}
         </button>
 
@@ -61,7 +91,7 @@ const Login = () => {
           <p>
             Already have an account?{" "}
             <span
-              onClick={() => setState("login")}
+              onClick={() => setState("Login")}
               className="text-primary underline cursor-pointer"
             >
               Login Here
@@ -84,4 +114,3 @@ const Login = () => {
 };
 
 export default Login;
-// 3-29

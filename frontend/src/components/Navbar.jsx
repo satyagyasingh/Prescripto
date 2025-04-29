@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { assets } from '../assets/assets';
 import { X } from 'lucide-react';
+import { AppContext } from '../context/AppContext';
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
-  const [token, setToken] = useState(true);
+  const { token, userData, logout } = useContext(AppContext);
 
   const navItems = [
     { path: '/', label: 'HOME' },
@@ -34,19 +35,19 @@ const Navbar = () => {
 
         {/* Desktop Auth Section */}
         <div className="hidden md:block">
-          {token ? (
+          {token && userData ? (
             <div className="flex items-center gap-2 cursor-pointer group relative">
-              <img className="w-8 rounded-full" src={assets.profile_pic} alt="Profile" />
+              <img className="w-8 rounded-full" src={userData.image} alt="Profile" />
               <img className="w-2.5" src={assets.dropdown_icon} alt="Dropdown" />
               <div className="absolute top-0 right-0 pt-14 font-medium text-gray-600 z-20 hidden group-hover:block">
                 <div className="min-w-40 bg-stone-100 rounded flex flex-col gap-4 p-4 shadow-lg">
-                  <p onClick={() => navigate("my-profile")} className="hover:text-black cursor-pointer">
+                  <p onClick={() => navigate("/my-profile")} className="hover:text-black cursor-pointer">
                     My Profile
                   </p>
-                  <p onClick={() => navigate("my-appointments")} className="hover:text-black cursor-pointer">
+                  <p onClick={() => navigate("/my-appointments")} className="hover:text-black cursor-pointer">
                     My Appointments
                   </p>
-                  <p onClick={() => setToken(false)} className="hover:text-black cursor-pointer">
+                  <p onClick={logout} className="hover:text-black cursor-pointer">
                     Logout
                   </p>
                 </div>
@@ -105,16 +106,16 @@ const Navbar = () => {
 
           {/* Mobile Auth Section */}
           <div className="mt-8">
-            {token ? (
+            {token && userData ? (
               <div className="flex flex-col gap-4 p-4 bg-gray-50 rounded-lg">
                 <div className="flex items-center gap-3">
-                  <img className="w-8 rounded-full" src={assets.profile_pic} alt="Profile" />
-                  <span className="font-medium">My Account</span>
+                  <img className="w-8 rounded-full" src={userData.image} alt="Profile" />
+                  <span className="font-medium">{userData.name}</span>
                 </div>
                 <hr className="border-gray-200" />
                 <button 
                   onClick={() => {
-                    navigate("my-profile");
+                    navigate("/my-profile");
                     setShowMenu(false);
                   }}
                   className="text-left hover:text-primary"
@@ -123,7 +124,7 @@ const Navbar = () => {
                 </button>
                 <button 
                   onClick={() => {
-                    navigate("my-appointments");
+                    navigate("/my-appointments");
                     setShowMenu(false);
                   }}
                   className="text-left hover:text-primary"
@@ -132,7 +133,7 @@ const Navbar = () => {
                 </button>
                 <button 
                   onClick={() => {
-                    setToken(false);
+                    logout();
                     setShowMenu(false);
                   }}
                   className="text-left text-red-500 hover:text-red-600"
