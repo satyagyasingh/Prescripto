@@ -3,7 +3,6 @@ import { assets } from '../../assets/assets'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import { AdminContext } from '../../context/AdminContext'
-import { AppContext } from '../../context/AppContext'
 
 const AddDoctor = () => {
     
@@ -19,8 +18,7 @@ const AddDoctor = () => {
     const [address1, setAddress1] = useState('')
     const [address2, setAddress2] = useState('')
 
-    const { backendUrl } = useContext(AdminContext)
-    const { aToken } = useContext(AdminContext)
+    const { backendUrl, aToken, getAllDoctors } = useContext(AdminContext)
 
     const onSubmitHandler = async (event) => {
         event.preventDefault()
@@ -44,14 +42,7 @@ const AddDoctor = () => {
             formData.append('degree', degree)
             formData.append('address', JSON.stringify({ line1: address1, line2: address2 }))
 
-            // console log formdata            
-            formData.forEach((value, key) => {
-                console.log(`${key}: ${value}`);
-            });
-
-            console.log(backendUrl + '/api/admin/add-doctor')
-
-            const { data } = await axios.post(backendUrl + '/api/admin/add-doctor', formData, { headers: { aToken: aToken } })
+            const { data } = await axios.post(backendUrl + '/api/admin/add-doctor', formData, { headers: { aToken } })
             if (data.success) {
                 toast.success(data.message)
                 setDocImg(false)
@@ -63,6 +54,7 @@ const AddDoctor = () => {
                 setDegree('')
                 setAbout('')
                 setFees('')
+                getAllDoctors()
             } else {
                 toast.error(data.message)
             }
