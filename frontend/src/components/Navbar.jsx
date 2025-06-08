@@ -8,6 +8,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const { token, userData, logout } = useContext(AppContext);
+  const adminUrl = import.meta.env.VITE_ADMIN_URL;
 
   const navItems = [
     { path: '/', label: 'HOME' },
@@ -34,7 +35,15 @@ const Navbar = () => {
         </ul>
 
         {/* Desktop Auth Section */}
-        <div className="hidden md:block">
+        <div className="hidden md:flex items-center gap-4">
+          <a
+            href={adminUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="border border-primary text-primary px-5 py-2 rounded-full text-xs font-light hover:bg-primary hover:text-white transition-all"
+          >
+            Admin Panel
+          </a>
           {token && userData ? (
             <div className="flex items-center gap-2 cursor-pointer group relative">
               <img className="w-8 rounded-full" src={userData.image} alt="Profile" />
@@ -106,6 +115,15 @@ const Navbar = () => {
 
           {/* Mobile Auth Section */}
           <div className="mt-8">
+            <a
+              href={adminUrl}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => setShowMenu(false)}
+              className="block w-full text-center border border-primary text-primary px-5 py-2 rounded-full mb-4 font-light"
+            >
+              Admin Panel
+            </a>
             {token && userData ? (
               <div className="flex flex-col gap-4 p-4 bg-gray-50 rounded-lg">
                 <div className="flex items-center gap-3">
